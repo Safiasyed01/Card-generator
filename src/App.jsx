@@ -4,12 +4,12 @@ const App = () => {
   const [Name, setName] = useState('')
   const [Gmail, setGmail] = useState('')
   const [phone, setphone] = useState('')
-
+  const [contacts, setcontacts] = useState([])
   const handleSubmit =(e)=>{
     e.preventDefault();
- console.log("Name:",Name)
- console.log("Gmail:",Gmail)
- console.log("phone:",phone)
+        const newContact = { Name, Gmail, phone };
+    setcontacts([...contacts, newContact]);
+
  setName("")
  setGmail("")
  setphone("")
@@ -33,7 +33,17 @@ const App = () => {
          <button className=' bg-gray-300 h-13 rounded-xl active:scale-99 w-full'>Add contacts</button>
 
       </form> 
+      {/* CARDS */}
+  <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{contacts.map((c,idx) =>(
+    <div key={idx}  className="bg-gray-800 p-5 rounded-xl shadow-md border border-gray-700 hover:scale-105 transition-all duration-200"
+> 
+    <h2 className="text-xl font-bold">{c.Name}</h2>
+    <p className="text-gray-300">{c.Gmail}</p>
+    <p className="text-gray-300">{c.phone}</p>
+     </div>
+  ))}
 
+  </div> 
     </div>
   )
 }
